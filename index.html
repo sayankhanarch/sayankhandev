@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <style>
-        /* === RESET & BASE === */
+        /* === ALL YOUR BEAUTIFUL ORIGINAL STYLES === */
         * {
             margin: 0;
             padding: 0;
@@ -39,6 +39,7 @@
             color: var(--text-primary);
             font-family: var(--font-sans);
             cursor: none;
+            scroll-behavior: smooth;
         }
 
         /* === CUSTOM CURSOR === */
@@ -62,12 +63,6 @@
             background: rgba(0, 212, 255, 0.1);
         }
 
-        .cursor.click {
-            width: 25px;
-            height: 25px;
-            border-color: var(--success);
-        }
-
         /* === GLASS MORPHISM === */
         .glass {
             background: var(--glass);
@@ -82,7 +77,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* === NAVIGATION - FIXED === */
+        /* === WORKING NAVIGATION - SIMPLE FIX === */
         .nav {
             position: fixed;
             top: 30px;
@@ -92,17 +87,14 @@
             padding: 12px 24px;
             display: flex;
             gap: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .nav.scrolled {
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .nav-item {
+        .nav-link {
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 14px;
@@ -110,13 +102,16 @@
             transition: color 0.3s;
             position: relative;
             cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
         }
 
-        .nav-item:hover, .nav-item.active {
+        .nav-link:hover, .nav-link.active {
             color: var(--text-primary);
         }
 
-        .nav-item::after {
+        .nav-link::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -127,31 +122,37 @@
             transition: width 0.3s;
         }
 
-        .nav-item:hover::after, .nav-item.active::after {
+        .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
         }
 
-        /* === HAMBURGER MENU - FIXED === */
+        /* === HAMBURGER MENU === */
         .hamburger {
             display: none;
             position: fixed;
             top: 30px;
             right: 30px;
             z-index: 1001;
-            width: 30px;
-            height: 20px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            background: none;
-            border: none;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 8px;
         }
 
         .hamburger span {
-            width: 100%;
+            width: 24px;
             height: 2px;
             background: var(--text-primary);
             transition: 0.3s;
+            display: block;
         }
 
         .hamburger.active span:nth-child(1) {
@@ -166,15 +167,15 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* === MOBILE MENU - FIXED === */
+        /* === MOBILE MENU === */
         .mobile-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(30px);
             z-index: 999;
             display: none;
             flex-direction: column;
@@ -187,13 +188,16 @@
             display: flex;
         }
 
-        .mobile-menu .nav-item {
-            font-size: 24px;
+        .mobile-menu .nav-link {
+            font-size: 2rem;
             color: var(--text-secondary);
+            padding: 10px 20px;
+            transition: all 0.3s ease;
         }
 
-        .mobile-menu .nav-item:hover {
+        .mobile-menu .nav-link:hover {
             color: var(--text-primary);
+            transform: translateX(10px);
         }
 
         /* === MAIN LAYOUT === */
@@ -214,23 +218,20 @@
             pointer-events: none;
         }
 
-        /* === CONTENT === */
-        .content {
+        /* === SECTIONS - KEY FIX === */
+        section {
+            min-height: 100vh;
+            padding: 120px 2rem 2rem;
             position: relative;
-            z-index: 10;
-            padding: 0 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            scroll-margin-top: 80px; /* THIS FIXES THE NAVIGATION */
         }
 
         /* === HERO SECTION === */
         .hero {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 2rem;
-            position: relative;
         }
 
         .hero-subtitle {
@@ -290,12 +291,6 @@
         }
 
         /* === PROJECTS SECTION === */
-        .section {
-            min-height: 100vh;
-            padding: 8rem 2rem;
-            position: relative;
-        }
-
         .section-title {
             font-size: 4rem;
             font-weight: 700;
@@ -727,6 +722,14 @@
     <!-- CUSTOM CURSOR -->
     <div class="cursor"></div>
 
+    <!-- WORKING NAVIGATION -->
+    <nav class="nav">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
     <!-- HAMBURGER MENU -->
     <button class="hamburger" id="hamburger">
         <span></span>
@@ -736,19 +739,11 @@
 
     <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" class="nav-item" data-section="home">Home</a>
-        <a href="#work" class="nav-item" data-section="work">Work</a>
-        <a href="#about" class="nav-item" data-section="about">About</a>
-        <a href="#contact" class="nav-item" data-section="contact">Contact</a>
+        <a href="#home" class="nav-link" onclick="closeMobileMenu()">Home</a>
+        <a href="#work" class="nav-link" onclick="closeMobileMenu()">Work</a>
+        <a href="#about" class="nav-link" onclick="closeMobileMenu()">About</a>
+        <a href="#contact" class="nav-link" onclick="closeMobileMenu()">Contact</a>
     </div>
-
-    <!-- NAVIGATION -->
-    <nav class="nav" id="nav">
-        <a href="#home" class="nav-item active" data-section="home">Home</a>
-        <a href="#work" class="nav-item" data-section="work">Work</a>
-        <a href="#about" class="nav-item" data-section="about">About</a>
-        <a href="#contact" class="nav-item" data-section="contact">Contact</a>
-    </nav>
 
     <!-- 3D CANVAS -->
     <canvas id="three-canvas"></canvas>
@@ -761,283 +756,281 @@
 
     <!-- MAIN CONTENT -->
     <div class="main-container">
-        <div class="content">
-            <!-- HOME SECTION -->
-            <section id="home" class="hero">
-                <div class="fade-in">
-                    <div class="hero-subtitle">SAYAN KHAN</div>
-                    <h1 class="hero-title">
-                        FULL-STACK<br>
-                        ARCHITECT
-                    </h1>
-                    <p class="hero-tagline">
-                        Building spatial interfaces where physics meets hyper-realism. 
-                        Full-stack web & mobile development with surgical precision.
+        <!-- HOME SECTION -->
+        <section id="home" class="hero">
+            <div class="fade-in">
+                <div class="hero-subtitle">SAYAN KHAN</div>
+                <h1 class="hero-title">
+                    FULL-STACK<br>
+                    ARCHITECT
+                </h1>
+                <p class="hero-tagline">
+                    Building spatial interfaces where physics meets hyper-realism. 
+                    Full-stack web & mobile development with surgical precision.
+                </p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">20+</div>
+                        <div class="stat-label">Projects Delivered</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">0.8s</div>
+                        <div class="stat-label">Load Time</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK SECTION -->
+        <section id="work">
+            <div class="fade-in">
+                <h2 class="section-title">Featured Work</h2>
+                <p class="section-subtitle">
+                    Interactive projects built with physics-based interfaces and spatial design principles.
+                </p>
+            </div>
+
+            <div class="project-grid">
+                <!-- PROJECT 1 -->
+                <div class="project-card glass fade-in" data-project="quantum">
+                    <div class="project-header">
+                        <h3 class="project-title">Quantum Dashboard</h3>
+                        <div class="project-year">2026</div>
+                    </div>
+                    <p class="project-description">
+                        Real-time analytics dashboard with physics-based data visualization.
+                        Processes 1M+ events per second with sub-20ms latency.
                     </p>
-                    <div class="stats">
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebSocket</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                    <div class="project-stats">
                         <div class="stat">
-                            <div class="stat-value">20+</div>
-                            <div class="stat-label">Projects Delivered</div>
+                            <div class="stat-value">99.9%</div>
+                            <div class="stat-label">Uptime</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-value">98%</div>
-                            <div class="stat-label">Client Satisfaction</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">0.8s</div>
-                            <div class="stat-label">Load Time</div>
+                            <div class="stat-value">16ms</div>
+                            <div class="stat-label">Response</div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- WORK SECTION -->
-            <section id="work" class="section">
-                <div class="fade-in">
-                    <h2 class="section-title">Featured Work</h2>
-                    <p class="section-subtitle">
-                        Interactive projects built with physics-based interfaces and spatial design principles.
+                <!-- PROJECT 2 -->
+                <div class="project-card glass fade-in" data-project="nexus">
+                    <div class="project-header">
+                        <h3 class="project-title">Nexus Design System</h3>
+                        <div class="project-year">2026</div>
+                    </div>
+                    <p class="project-description">
+                        Atomic design system serving 30+ products with zero runtime overhead.
+                        Physics-based animations and modular architecture.
                     </p>
-                </div>
-
-                <div class="project-grid">
-                    <!-- PROJECT 1 -->
-                    <div class="project-card glass fade-in" data-project="quantum">
-                        <div class="project-header">
-                            <h3 class="project-title">Quantum Dashboard</h3>
-                            <div class="project-year">2024</div>
-                        </div>
-                        <p class="project-description">
-                            Real-time analytics dashboard with physics-based data visualization.
-                            Processes 1M+ events per second with sub-20ms latency.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Three.js</span>
-                            <span class="tech-tag">WebSocket</span>
-                            <span class="tech-tag">Node.js</span>
-                        </div>
-                        <div class="project-stats">
-                            <div class="stat">
-                                <div class="stat-value">99.9%</div>
-                                <div class="stat-label">Uptime</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">16ms</div>
-                                <div class="stat-label">Response</div>
-                            </div>
-                        </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">CSS-in-JS</span>
+                        <span class="tech-tag">Framer Motion</span>
+                        <span class="tech-tag">Storybook</span>
                     </div>
-
-                    <!-- PROJECT 2 -->
-                    <div class="project-card glass fade-in" data-project="nexus">
-                        <div class="project-header">
-                            <h3 class="project-title">Nexus Design System</h3>
-                            <div class="project-year">2024</div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">45kb</div>
+                            <div class="stat-label">Size</div>
                         </div>
-                        <p class="project-description">
-                            Atomic design system serving 30+ products with zero runtime overhead.
-                            Physics-based animations and modular architecture.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">CSS-in-JS</span>
-                            <span class="tech-tag">Framer Motion</span>
-                            <span class="tech-tag">Storybook</span>
-                        </div>
-                        <div class="project-stats">
-                            <div class="stat">
-                                <div class="stat-value">45kb</div>
-                                <div class="stat-label">Size</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">150+</div>
-                                <div class="stat-label">Components</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PROJECT 3 -->
-                    <div class="project-card glass fade-in" data-project="orion">
-                        <div class="project-header">
-                            <h3 class="project-title">Orion Mobile App</h3>
-                            <div class="project-year">2026</div>
-                        </div>
-                        <p class="project-description">
-                            Cross-platform mobile app with 3D product visualization.
-                            Real-time AR preview and offline functionality.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React Native</span>
-                            <span class="tech-tag">WebGL</span>
-                            <span class="tech-tag">GraphQL</span>
-                            <span class="tech-tag">Redis</span>
-                        </div>
-                        <div class="project-stats">
-                            <div class="stat">
-                                <div class="stat-value">+34%</div>
-                                <div class="stat-label">Conversion</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">4.9★</div>
-                                <div class="stat-label">Rating</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PROJECT 4 -->
-                    <div class="project-card glass fade-in" data-project="cyber">
-                        <div class="project-header">
-                            <h3 class="project-title">Cyber Commerce</h3>
-                            <div class="project-year">2026</div>
-                        </div>
-                        <p class="project-description">
-                            High-performance e-commerce platform with 3D product visualization.
-                            Edge computing, predictive loading, real-time inventory.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">Stripe</span>
-                            <span class="tech-tag">CDN</span>
-                            <span class="tech-tag">WebAssembly</span>
-                        </div>
-                        <div class="project-stats">
-                            <div class="stat">
-                                <div class="stat-value">1.1s</div>
-                                <div class="stat-label">TTI</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">92</div>
-                                <div class="stat-label">Core Vital</div>
-                            </div>
+                        <div class="stat">
+                            <div class="stat-value">150+</div>
+                            <div class="stat-label">Components</div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- ABOUT SECTION -->
-            <section id="about" class="section">
-                <div class="fade-in">
-                    <h2 class="section-title">Architecture Philosophy</h2>
-                    <div class="about-content">
-                        <p class="about-text">
-                            I'm <strong>Sayan Khan</strong> - a full-stack architect specializing in spatial interfaces 
-                            and physics-based user experiences. My approach combines engineering precision 
-                            with artistic vision to create digital environments that feel tangible.
-                        </p>
-                        <p class="about-text">
-                            With expertise across the entire stack - from 3D rendering with WebGL to 
-                            scalable backend systems - I build products where every interaction has 
-                            physical properties and every pixel serves a purpose.
-                        </p>
-                        
-                        <div class="skill-list">
-                            <div class="skill-category">
-                                <h3>Frontend Architecture</h3>
-                                <ul>
-                                    <li>React / Next.js / Vue</li>
-                                    <li>Three.js / WebGL</li>
-                                    <li>TypeScript</li>
-                                    <li>Design Systems</li>
-                                    <li>Performance Optimization</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="skill-category">
-                                <h3>Backend & Mobile</h3>
-                                <ul>
-                                    <li>Node.js / Python</li>
-                                    <li>GraphQL / REST APIs</li>
-                                    <li>React Native</li>
-                                    <li>PostgreSQL / MongoDB</li>
-                                    <li>Docker / Kubernetes</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="skill-category">
-                                <h3>Specialized</h3>
-                                <ul>
-                                    <li>3D Visualization</li>
-                                    <li>Physics Simulations</li>
-                                    <li>Real-time Systems</li>
-                                    <li>AR/VR Development</li>
-                                    <li>WebAssembly</li>
-                                </ul>
-                            </div>
+                <!-- PROJECT 3 -->
+                <div class="project-card glass fade-in" data-project="orion">
+                    <div class="project-header">
+                        <h3 class="project-title">Orion Mobile App</h3>
+                        <div class="project-year">2026</div>
+                    </div>
+                    <p class="project-description">
+                        Cross-platform mobile app with 3D product visualization.
+                        Real-time AR preview and offline functionality.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">WebGL</span>
+                        <span class="tech-tag">GraphQL</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">+34%</div>
+                            <div class="stat-label">Conversion</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">4.9★</div>
+                            <div class="stat-label">Rating</div>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- CONTACT SECTION -->
-            <section id="contact" class="section">
-                <div class="fade-in">
-                    <h2 class="section-title">Start a Project</h2>
-                    <p class="section-subtitle">
-                        For serious projects that require architectural thinking and technical precision.
+                <!-- PROJECT 4 -->
+                <div class="project-card glass fade-in" data-project="cyber">
+                    <div class="project-header">
+                        <h3 class="project-title">Cyber Commerce</h3>
+                        <div class="project-year">2026</div>
+                    </div>
+                    <p class="project-description">
+                        High-performance e-commerce platform with 3D product visualization.
+                        Edge computing, predictive loading, real-time inventory.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">CDN</span>
+                        <span class="tech-tag">WebAssembly</span>
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">1.1s</div>
+                            <div class="stat-label">TTI</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">92</div>
+                            <div class="stat-label">Core Vital</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="fade-in">
+                <h2 class="section-title">Architecture Philosophy</h2>
+                <div class="about-content">
+                    <p class="about-text">
+                        I'm <strong>Sayan Khan</strong> - a full-stack architect specializing in spatial interfaces 
+                        and physics-based user experiences. My approach combines engineering precision 
+                        with artistic vision to create digital environments that feel tangible.
+                    </p>
+                    <p class="about-text">
+                        With expertise across the entire stack - from 3D rendering with WebGL to 
+                        scalable backend systems - I build products where every interaction has 
+                        physical properties and every pixel serves a purpose.
                     </p>
                     
-                    <div class="contact-form glass-heavy" style="padding: 3rem; border-radius: 24px;">
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <input type="text" id="name" class="form-input" placeholder=" " required>
-                                <label for="name" class="form-label">Your Name</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="email" id="email" class="form-input" placeholder=" " required>
-                                <label for="email" class="form-label">Email Address</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" id="company" class="form-input" placeholder=" ">
-                                <label for="company" class="form-label">Company (Optional)</label>
-                            </div>
-                            
-                            <div class="form-group">
-                                <textarea id="message" class="form-input form-textarea" placeholder=" " required></textarea>
-                                <label for="message" class="form-label">Project Details</label>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <div class="info-item">
-                            <div class="info-icon">✉️</div>
-                            <div class="info-content">
-                                <div class="info-label">Email</div>
-                                <div class="info-value">hello@sayan.dev</div>
-                            </div>
+                    <div class="skill-list">
+                        <div class="skill-category">
+                            <h3>Frontend Architecture</h3>
+                            <ul>
+                                <li>React / Next.js / Vue</li>
+                                <li>Three.js / WebGL</li>
+                                <li>TypeScript</li>
+                                <li>Design Systems</li>
+                                <li>Performance Optimization</li>
+                            </ul>
                         </div>
                         
-                        <div class="info-item">
-                            <div class="info-icon">⏱️</div>
-                            <div class="info-content">
-                                <div class="info-label">Response Time</div>
-                                <div class="info-value">Within 24 hours</div>
-                            </div>
+                        <div class="skill-category">
+                            <h3>Backend & Mobile</h3>
+                            <ul>
+                                <li>Node.js / Python</li>
+                                <li>GraphQL / REST APIs</li>
+                                <li>React Native</li>
+                                <li>PostgreSQL / MongoDB</li>
+                                <li>Docker / Kubernetes</li>
+                            </ul>
                         </div>
                         
-                        <div class="info-item">
-                            <div class="info-icon">📍</div>
-                            <div class="info-content">
-                                <div class="info-label">Location</div>
-                                <div class="info-value">Remote • Global</div>
-                            </div>
+                        <div class="skill-category">
+                            <h3>Specialized</h3>
+                            <ul>
+                                <li>3D Visualization</li>
+                                <li>Physics Simulations</li>
+                                <li>Real-time Systems</li>
+                                <li>AR/VR Development</li>
+                                <li>WebAssembly</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- FOOTER -->
-            <footer class="footer">
-                <p class="footer-text">SAYAN KHAN © 2024 — ARCHITECTING THE SPATIAL WEB</p>
-            </footer>
-        </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="fade-in">
+                <h2 class="section-title">Start a Project</h2>
+                <p class="section-subtitle">
+                    For serious projects that require architectural thinking and technical precision.
+                </p>
+                
+                <div class="contact-form glass-heavy" style="padding: 3rem; border-radius: 24px;">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" class="form-input" placeholder=" " required>
+                            <label for="name" class="form-label">Your Name</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" class="form-input" placeholder=" " required>
+                            <label for="email" class="form-label">Email Address</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="company" class="form-input" placeholder=" ">
+                            <label for="company" class="form-label">Company (Optional)</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="message" class="form-input form-textarea" placeholder=" " required></textarea>
+                            <label for="message" class="form-label">Project Details</label>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">✉️</div>
+                        <div class="info-content">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">hello@sayan.dev</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">⏱️</div>
+                        <div class="info-content">
+                            <div class="info-label">Response Time</div>
+                            <div class="info-value">Within 24 hours</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <div class="info-label">Location</div>
+                            <div class="info-value">Remote • Global</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p class="footer-text">SAYAN KHAN © 2024 — ARCHITECTING THE SPATIAL WEB</p>
+        </footer>
     </div>
 
     <!-- PROJECT MODALS -->
@@ -1051,663 +1044,214 @@
     </div>
 
     <script>
-        // === INITIALIZE EVERYTHING ===
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 SAYAN KHAN Portfolio loaded');
+        // === SIMPLE WORKING NAVIGATION ===
+        function closeMobileMenu() {
+            document.getElementById('hamburger').classList.remove('active');
+            document.getElementById('mobileMenu').classList.remove('active');
+        }
+
+        // Hamburger toggle
+        document.getElementById('hamburger').addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Update active nav on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
             
-            // Initialize all features
-            initCustomCursor();
-            init3DScene();
-            initNavigation();
-            initProjectCards();
-            initScrollAnimations();
-            initContactForm();
-            initLowPowerMode();
-            
-            // No loading screen - instant display
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
         });
 
         // === CUSTOM CURSOR ===
-        function initCustomCursor() {
-            const cursor = document.querySelector('.cursor');
-            
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-            
-            // Hover effects
-            const hoverElements = document.querySelectorAll('.project-card, .nav-item, .submit-btn, .tech-tag, .close-modal');
-            hoverElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.classList.add('hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('hover');
-                });
-            });
-            
-            // Click effects
-            document.addEventListener('mousedown', () => {
-                cursor.classList.add('click');
-            });
-            document.addEventListener('mouseup', () => {
-                cursor.classList.remove('click');
-            });
-        }
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        const hoverElements = document.querySelectorAll('.project-card, .nav-link, .submit-btn, .tech-tag');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
 
         // === 3D SCENE ===
-        function init3DScene() {
-            const canvas = document.getElementById('three-canvas');
-            
-            // Create scene
-            const scene = new THREE.Scene();
-            
-            // Create camera
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-            
-            // Create renderer
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas: canvas,
-                alpha: true,
-                antialias: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            
-            // Create floating geometric objects
-            const geometry = new THREE.IcosahedronGeometry(0.5, 0);
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x2E5BFF,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.2
-            });
-            
-            // Create multiple floating objects
-            const objects = [];
-            for (let i = 0; i < 20; i++) {
-                const mesh = new THREE.Mesh(geometry, material);
-                
-                // Random position in a sphere
-                const radius = 15;
-                const theta = Math.random() * Math.PI * 2;
-                const phi = Math.acos(2 * Math.random() - 1);
-                
-                mesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
-                mesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
-                mesh.position.z = radius * Math.cos(phi);
-                
-                // Random scale
-                mesh.scale.setScalar(0.3 + Math.random() * 0.7);
-                
-                // Store animation data
-                mesh.userData = {
-                    speed: 0.1 + Math.random() * 0.2,
-                    radius: radius,
-                    theta: theta,
-                    phi: phi
-                };
-                
-                scene.add(mesh);
-                objects.push(mesh);
-            }
-            
-            // Add floating particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 200;
-            const posArray = new Float32Array(particlesCount * 3);
-            
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 40;
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.02,
-                color: 0x2E5BFF,
-                transparent: true,
-                opacity: 0.3
-            });
-            
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-            
-            // Mouse interaction
-            let mouseX = 0;
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-            });
-            
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                // Animate floating objects in orbital paths
-                objects.forEach(obj => {
-                    obj.userData.theta += 0.005 * obj.userData.speed;
-                    
-                    obj.position.x = obj.userData.radius * Math.sin(obj.userData.phi) * Math.cos(obj.userData.theta);
-                    obj.position.y = obj.userData.radius * Math.sin(obj.userData.phi) * Math.sin(obj.userData.theta);
-                    obj.position.z = obj.userData.radius * Math.cos(obj.userData.phi);
-                    
-                    // Gentle rotation
-                    obj.rotation.x += 0.01;
-                    obj.rotation.y += 0.01;
-                    
-                    // Mouse interaction - subtle push effect
-                    const dx = mouseX * 10 - obj.position.x * 0.1;
-                    const dy = mouseY * 10 - obj.position.y * 0.1;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 3) {
-                        obj.position.x -= dx * 0.1;
-                        obj.position.y -= dy * 0.1;
-                    }
-                });
-                
-                // Animate particles
-                particlesMesh.rotation.x += 0.001;
-                particlesMesh.rotation.y += 0.002;
-                
-                // Camera follows mouse (subtle)
-                camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
-                camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
+        const canvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: canvas,
+            alpha: true,
+            antialias: true
+        });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        camera.position.z = 5;
 
-        // === NAVIGATION ===
-        function initNavigation() {
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const nav = document.getElementById('nav');
-            const navItems = document.querySelectorAll('.nav-item');
-            
-            // Toggle mobile menu
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-            });
-            
-            // Close mobile menu when clicking links
-            document.querySelectorAll('.mobile-menu .nav-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                });
-            });
-            
-            // Update active nav item on scroll
-            const sections = document.querySelectorAll('section');
-            
-            window.addEventListener('scroll', () => {
-                // Add background to nav when scrolled
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-                
-                // Update active nav item
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    
-                    if (window.scrollY >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                    if (item.getAttribute('data-section') === current) {
-                        item.classList.add('active');
-                    }
-                });
-            });
-            
-            // Smooth scroll for navigation
-            navItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = item.getAttribute('data-section');
-                    const targetSection = document.getElementById(targetId);
-                    
-                    if (targetSection) {
-                        window.scrollTo({
-                            top: targetSection.offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
+        // Create floating objects
+        const geometry = new THREE.IcosahedronGeometry(0.5, 0);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x2E5BFF,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.2
+        });
 
-        // === PROJECT CARDS - INTERACTIVE ===
-        function initProjectCards() {
-            const projectCards = document.querySelectorAll('.project-card');
-            const modal = document.getElementById('projectModal');
-            const closeModal = document.getElementById('closeModal');
-            const modalContent = document.getElementById('modalContent');
+        const objects = [];
+        for (let i = 0; i < 20; i++) {
+            const mesh = new THREE.Mesh(geometry, material);
+            const radius = 15;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
             
-            // Project data
-            const projects = {
-                quantum: {
-                    title: "Quantum Dashboard",
-                    year: "2024",
-                    description: "Real-time analytics dashboard built with physics-based data visualization and WebGL acceleration. Processes over 1 million events per second with sub-20ms latency across distributed systems.",
-                    fullDescription: `
-                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Quantum Dashboard</h2>
-                        <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Enterprise SaaS</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Real-time Analytics</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">WebGL Visualization</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Challenge</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Large enterprises needed real-time visibility into their distributed systems 
-                                but existing solutions had latency issues and poor visualization capabilities.
-                            </p>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Solution</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Built a physics-based visualization engine using Three.js that represents 
-                                data flows as particles with realistic motion. Implemented WebSocket 
-                                connections for real-time updates and WebAssembly modules for data processing.
-                            </p>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">99.9%</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Uptime</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">16ms</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Average Response</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">1M+</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Events/Second</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">60FPS</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Visualization</div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Tech Stack</h3>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">React</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">Three.js</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">Node.js</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">WebSocket</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">Redis</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">PostgreSQL</div>
-                                <div style="padding: 0.5rem 1rem; background: rgba(46, 91, 255, 0.1); border-radius: 4px; font-size: 0.875rem;">Docker</div>
-                            </div>
-                        </div>
-                    `
-                },
-                nexus: {
-                    title: "Nexus Design System",
-                    year: "2024",
-                    description: "Atomic design system serving 30+ enterprise products with zero runtime overhead. Features physics-based animations and modular architecture.",
-                    fullDescription: `
-                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Nexus Design System</h2>
-                        <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Design System</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Enterprise</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Monorepo</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Challenge</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Large organizations had inconsistent UI across 30+ products, 
-                                leading to poor user experience and high maintenance costs.
-                            </p>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Solution</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Created an atomic design system with physics-based animations 
-                                and zero runtime overhead. Built as a monorepo with automatic 
-                                versioning and CDN distribution.
-                            </p>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">45kb</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Gzipped Size</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">150+</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Components</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">30+</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Products</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">0ms</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Runtime Overhead</div>
-                            </div>
-                        </div>
-                    `
-                },
-                orion: {
-                    title: "Orion Mobile App",
-                    year: "2026",
-                    description: "Cross-platform mobile app with 3D product visualization and AR capabilities. Features real-time collaboration and offline functionality.",
-                    fullDescription: `
-                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Orion Mobile App</h2>
-                        <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Mobile App</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">3D/AR</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Cross-platform</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Challenge</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                E-commerce companies needed better product visualization 
-                                on mobile devices to reduce returns and increase engagement.
-                            </p>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Solution</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Built a cross-platform React Native app with WebGL-powered 
-                                3D visualization and ARKit/ARCore integration for virtual try-on.
-                            </p>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">+34%</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Conversion Rate</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">4.9★</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">App Store Rating</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">-28%</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Return Rate</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">2M+</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Downloads</div>
-                            </div>
-                        </div>
-                    `
-                },
-                cyber: {
-                    title: "Cyber Commerce",
-                    year: "2026",
-                    description: "High-performance e-commerce platform with edge computing, 3D product visualization, and real-time inventory management.",
-                    fullDescription: `
-                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Cyber Commerce</h2>
-                        <div style="display: flex; gap: 2rem; margin-bottom: 2rem;">
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">E-commerce</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Edge Computing</div>
-                            <div style="padding: 0.75rem 1.5rem; background: rgba(46, 91, 255, 0.1); border-radius: 50px; font-size: 0.875rem;">Real-time</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Challenge</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Traditional e-commerce platforms couldn't handle real-time 
-                                inventory updates and 3D product visualization at scale.
-                            </p>
-                        </div>
-                        
-                        <div style="margin-bottom: 2rem;">
-                            <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Solution</h3>
-                            <p style="color: var(--text-secondary); line-height: 1.6;">
-                                Built a Next.js platform with edge computing for global CDN 
-                                distribution, WebAssembly for 3D rendering, and real-time 
-                                inventory synchronization.
-                            </p>
-                        </div>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">1.1s</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Time to Interactive</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">92</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Core Web Vital Score</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">99.95%</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Uptime</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 2rem; font-weight: 700; color: var(--electric-blue);">50ms</div>
-                                <div style="font-size: 0.875rem; color: var(--text-tertiary);">Cart Updates</div>
-                            </div>
-                        </div>
-                    `
-                }
+            mesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
+            mesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
+            mesh.position.z = radius * Math.cos(phi);
+            mesh.scale.setScalar(0.3 + Math.random() * 0.7);
+            
+            mesh.userData = {
+                speed: 0.1 + Math.random() * 0.2,
+                radius: radius,
+                theta: theta,
+                phi: phi
             };
             
-            // Add hover tilt effect
-            projectCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateY = ((x - centerX) / centerX) * 5;
-                    const rotateX = ((centerY - y) / centerY) * 5;
-                    
-                    card.style.transform = `
-                        perspective(1000px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        translateY(-10px)
-                        scale(1.02)
-                    `;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px) scale(1.02)';
-                });
-                
-                // Click to open modal
-                card.addEventListener('click', () => {
-                    const projectId = card.getAttribute('data-project');
-                    const project = projects[projectId];
-                    
-                    if (project) {
-                        modalContent.innerHTML = project.fullDescription;
-                        modal.classList.add('active');
-                        document.body.style.overflow = 'hidden';
-                    }
-                });
-            });
-            
-            // Close modal
-            closeModal.addEventListener('click', () => {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            scene.add(mesh);
+            objects.push(mesh);
         }
+
+        // Add particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 200;
+        const posArray = new Float32Array(particlesCount * 3);
+        
+        for (let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 40;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0x2E5BFF,
+            transparent: true,
+            opacity: 0.3
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Mouse interaction
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            objects.forEach(obj => {
+                obj.userData.theta += 0.005 * obj.userData.speed;
+                obj.position.x = obj.userData.radius * Math.sin(obj.userData.phi) * Math.cos(obj.userData.theta);
+                obj.position.y = obj.userData.radius * Math.sin(obj.userData.phi) * Math.sin(obj.userData.theta);
+                obj.position.z = obj.userData.radius * Math.cos(obj.userData.phi);
+                obj.rotation.x += 0.01;
+                obj.rotation.y += 0.01;
+            });
+            
+            particlesMesh.rotation.x += 0.001;
+            particlesMesh.rotation.y += 0.002;
+            
+            camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // === PROJECT CARDS INTERACTIONS ===
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateY = ((x - centerX) / centerX) * 5;
+                const rotateX = ((centerY - y) / centerY) * 5;
+                
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-10px)
+                    scale(1.02)
+                `;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-10px) scale(1.02)';
+            });
+        });
 
         // === SCROLL ANIMATIONS ===
-        function initScrollAnimations() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(el => observer.observe(el));
-        }
-
-        // === CONTACT FORM ===
-        function initContactForm() {
-            const form = document.getElementById('contactForm');
-            
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData);
-                
-                // Simple validation
-                if (!data.name || !data.email || !data.message) {
-                    showNotification('Please fill in all required fields', 'error');
-                    return;
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-                
-                // In a real app, you would send this to a server
-                // For demo, just show success message
-                
-                // Show loading
-                const submitBtn = form.querySelector('.submit-btn');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-                
-                // Simulate API call
-                setTimeout(() => {
-                    // Reset form
-                    form.reset();
-                    
-                    // Reset button
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    
-                    // Show success message
-                    showNotification('Message sent successfully! I\'ll respond within 24 hours.', 'success');
-                    
-                    // You would normally send to your backend here:
-                    // fetch('/api/contact', {
-                    //     method: 'POST',
-                    //     headers: { 'Content-Type': 'application/json' },
-                    //     body: JSON.stringify(data)
-                    // })
-                }, 1500);
             });
-        }
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => observer.observe(el));
 
         // === LOW POWER MODE ===
-        function initLowPowerMode() {
-            const toggle = document.getElementById('powerToggle');
-            
-            toggle.addEventListener('click', () => {
-                toggle.classList.toggle('active');
-                const isLowPower = toggle.classList.contains('active');
-                
-                if (isLowPower) {
-                    // Reduce animations
-                    document.querySelectorAll('.project-card').forEach(card => {
-                        card.style.transition = 'none';
-                    });
-                    
-                    // Reduce 3D complexity (in a real app, you'd reduce particle count)
-                    showNotification('Low Power Mode: Reduced animations for better performance');
-                } else {
-                    // Restore animations
-                    document.querySelectorAll('.project-card').forEach(card => {
-                        card.style.transition = 'all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)';
-                    });
-                    
-                    showNotification('High Fidelity Mode: Full animations enabled');
-                }
+        document.getElementById('powerToggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            const isLowPower = this.classList.contains('active');
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.style.transition = isLowPower ? 'none' : 'all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)';
             });
-        }
-
-        // === HELPER FUNCTIONS ===
-        function showNotification(message, type = 'info') {
-            // Remove existing notification
-            const existing = document.querySelector('.notification');
-            if (existing) existing.remove();
-            
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 30px;
-                padding: 1rem 2rem;
-                background: ${type === 'error' ? 'var(--danger)' : 'var(--electric-blue)'};
-                color: white;
-                border-radius: 12px;
-                font-family: inherit;
-                font-size: 0.875rem;
-                z-index: 10001;
-                animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // Add CSS for notifications
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes fadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+            alert(isLowPower ? 'Low Power Mode Activated' : 'High Fidelity Mode');
+        });
     </script>
 </body>
 </html>
