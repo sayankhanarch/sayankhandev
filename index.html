@@ -2,16 +2,17 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>SAYAN KHAN | Full-stack Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAYAN KHAN | Full-stack Dev</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"></script>
     <style>
-        /* EXACT ORIGINAL RESET & VARIABLES */
+        /* RESET & VARIABLES */
         :root {
             --bg-primary: #050505;
             --bg-secondary: #0A0A0A;
@@ -42,7 +43,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
         
         html {
@@ -59,7 +59,7 @@
             cursor: none;
         }
         
-        /* CUSTOM CURSOR - Desktop only */
+        /* CUSTOM CURSOR */
         .cursor {
             position: fixed;
             width: 20px;
@@ -83,11 +83,6 @@
             z-index: 9998;
             transform: translate(-50%, -50%);
             transition: all 0.3s ease-out;
-        }
-        
-        @media (hover: none) and (pointer: coarse) {
-            body { cursor: default; }
-            .cursor, .cursor-follower { display: none; }
         }
         
         /* LOADER */
@@ -706,6 +701,29 @@
         .opacity-50 { opacity: 0.5; }
         .opacity-75 { opacity: 0.75; }
         
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            h1 { font-size: 4rem; }
+            h2 { font-size: 2.5rem; }
+            .hero-title { font-size: 4rem; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .hero-title { font-size: 3rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .nav { display: none; }
+            .hero-stats { flex-direction: column; gap: 2rem; }
+            .skills-container { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: 2rem; text-align: center; }
+            .work-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 0; }
+            .showcase-title { font-size: 2.5rem; }
+            .contact-title { font-size: 2.5rem; }
+        }
+        
         /* ANIMATIONS */
         .fade-in {
             opacity: 0;
@@ -740,200 +758,6 @@
             background: var(--text-primary);
             transform: scale(1.5);
         }
-        
-        /* RESPONSIVE BREAKPOINTS - Preserving design while making it responsive */
-        @media (max-width: 1200px) {
-            h1 { font-size: 4rem; }
-            h2 { font-size: 2.5rem; }
-            .hero-title { font-size: 4rem; }
-            .work-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-        }
-        
-        @media (max-width: 992px) {
-            .skills-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .skill-item {
-                flex-wrap: wrap;
-            }
-            
-            .skill-bar {
-                width: 100%;
-                max-width: 300px;
-                margin: 0.5rem 0;
-            }
-            
-            .skill-value {
-                text-align: left;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container { padding: 0 1.5rem; }
-            
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.25rem; }
-            h3 { font-size: 1.75rem; }
-            
-            .hero-title { font-size: 3.5rem; }
-            .hero-subtitle { font-size: 1.125rem; }
-            
-            .nav {
-                width: calc(100% - 3rem);
-                padding: 0.75rem 1.5rem;
-                gap: 1.5rem;
-                justify-content: space-between;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 10, 0.95);
-                backdrop-filter: blur(20px);
-                padding: 1rem;
-                border-radius: var(--radius-lg);
-                flex-direction: column;
-                align-items: center;
-                margin-top: 0.5rem;
-                border: 1px solid var(--border);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                background: none;
-                border: none;
-                color: var(--text-primary);
-                cursor: pointer;
-                padding: 0.5rem;
-            }
-            
-            .mobile-menu-btn svg {
-                width: 24px;
-                height: 24px;
-            }
-            
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-stats,
-            .showcase-stats {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .showcase {
-                height: auto;
-                min-height: 100vh;
-            }
-            
-            .showcase-title {
-                font-size: 2.5rem;
-            }
-            
-            .contact-title {
-                font-size: 2.5rem;
-            }
-            
-            section {
-                padding: 6rem 0;
-            }
-            
-            .section-number {
-                top: 2rem;
-                left: 1.5rem;
-            }
-            
-            .scroll-indicator {
-                display: none;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 2rem;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 { font-size: 2.75rem; }
-            h2 { font-size: 2rem; }
-            
-            .hero-title { font-size: 2.75rem; }
-            .container { padding: 0 1rem; }
-            
-            .nav {
-                width: calc(100% - 2rem);
-                padding: 0.75rem 1.25rem;
-            }
-            
-            .work-card {
-                padding: 1.5rem;
-            }
-            
-            .work-card-stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .work-card-stat {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .work-card-stat-value {
-                font-size: 1.25rem;
-            }
-            
-            .skills-container {
-                gap: 2rem;
-            }
-            
-            .skill-category {
-                margin-bottom: 2rem;
-            }
-        }
-        
-        /* Handle touch devices */
-        @media (hover: none) and (pointer: coarse) {
-            .work-card:hover {
-                transform: none;
-            }
-            
-            .work-card:hover::before {
-                left: -100%;
-            }
-            
-            .btn:hover {
-                transform: none;
-            }
-            
-            .cursor, .cursor-follower {
-                display: none;
-            }
-            
-            body {
-                cursor: default;
-            }
-        }
-        
-        /* Prevent horizontal scroll on mobile */
-        @media (max-width: 768px) {
-            html, body {
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-        }
     </style>
 </head>
 <body>
@@ -965,12 +789,7 @@
     <!-- NAVIGATION -->
     <nav class="nav">
         <div class="nav-logo">SAYAN KHAN</div>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 12H21M3 6H21M3 18H21"/>
-            </svg>
-        </button>
-        <div class="nav-links" id="navLinks">
+        <div class="nav-links">
             <a href="#hero" class="nav-link active">Home</a>
             <a href="#work" class="nav-link">Work</a>
             <a href="#skills" class="nav-link">Skills</a>
@@ -1025,7 +844,7 @@
             <div class="fade-in mb-6">
                 <h2 class="text-center">Engineering Works</h2>
                 <p class="text-center text-large opacity-75 mt-2">
-                    Precision-built projects that push technical boundaries
+                    Coming Soon
                 </p>
             </div>
            
@@ -1035,11 +854,11 @@
                     <div class="work-card-header">
                         <h3 class="work-card-title">Quantum Dashboard</h3>
                         <div class="work-card-year">2023</div>
-                    </div>
+                    </div> 
                     <p class="work-card-description">
                         Real-time analytics platform processing 10M+ events daily. 
                         Built with WebAssembly for near-native performance.
-                    </p>
+                    </p> 
                     <div class="work-card-stats">
                         <div class="work-card-stat">
                             <div class="work-card-stat-value">99.9%</div>
@@ -1060,11 +879,11 @@
                         <span class="tech-tag">Rust</span>
                         <span class="tech-tag">TypeScript</span>
                     </div>
-                </div>
+                </div> -->
             
-                <!-- PROJECT 2 -->
+                <!-- PROJECT 2 
                 <div class="work-card fade-in">
-                    <div class="work-card-header"> 
+                    <div class="work-card-header">
                         <h3 class="work-card-title">Nexus Design System</h3>
                         <div class="work-card-year">2023</div>
                     </div>
@@ -1092,9 +911,9 @@
                         <span class="tech-tag">Build Plugins</span>
                         <span class="tech-tag">Monorepo</span>
                     </div>
-                </div>
+                </div> -->
                 
-                <!-- PROJECT 3 -->
+                <!-- PROJECT 3 
                 <div class="work-card fade-in">
                     <div class="work-card-header">
                         <h3 class="work-card-title">Orion E-Commerce</h3>
@@ -1123,12 +942,13 @@
                         <span class="tech-tag">GraphQL</span>
                         <span class="tech-tag">CDN</span>
                         <span class="tech-tag">Edge Functions</span>
-                    </div>
+                    </div> -->
+    
                 </div>
             </div>
         </div>
         <div class="section-number">02</div>
-    </section>
+    </section> 
 
     <!-- SKILLS SECTION -->
     <section id="skills" class="skills">
@@ -1209,356 +1029,289 @@
             </div>
         </div>
         <div class="section-number">03</div>
-</section>
-
-<!-- SHOWCASE SECTION -->
-<section id="showcase" class="showcase">
-    <canvas class="showcase-canvas" id="showcase-canvas"></canvas>
-    <div class="container">
-        <div class="showcase-content">
+    </section>
+    
+    <!-- SHOWCASE SECTION -->
+    <section id="showcase" class="showcase">
+        <canvas class="showcase-canvas" id="showcase-canvas"></canvas>
+        <div class="container">
+            <div class="showcase-content">
+                <div class="fade-in">
+                    <h2 class="showcase-title">Interactive Showcase</h2>
+                    <p class="showcase-subtitle">
+                        This portfolio itself is a performance benchmark. 
+                        Built with 60FPS as a non-negotiable constraint.
+                    </p>
+                    <div class="showcase-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-number" id="fps-counter">60</div>
+                            <div class="hero-stat-label">Current FPS</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-number" id="memory-usage">24</div>
+                            <div class="hero-stat-label">MB Used</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-number" id="load-time">0.8</div>
+                            <div class="hero-stat-label">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-number">04</div>
+    </section>
+    
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="container">
             <div class="fade-in">
-                <h2 class="showcase-title">Interactive Showcase</h2>
-                <p class="showcase-subtitle">
-                    This portfolio itself is a performance benchmark. 
-                    Built with 60FPS as a non-negotiable constraint.
+                <h2 class="contact-title">Contact Links at the very Bottom</h2>
+                <p class="contact-subtitle">
+                    
                 </p>
-                <div class="showcase-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" id="fps-counter">60</div>
-                        <div class="hero-stat-label">Current FPS</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" id="memory-usage">24</div>
-                        <div class="hero-stat-label">MB Used</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number" id="load-time">0.8</div>
-                        <div class="hero-stat-label">Seconds</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section-number">04</div>
-</section>
-
-<!-- CONTACT SECTION -->
-<section id="contact" class="contact">
-    <div class="container">
-        <div class="fade-in">
-            <h2 class="contact-title">Contact Links at the very Bottom</h2>
-            <p class="contact-subtitle">
                 
-            </p>
-            
-           <!-- <form class="contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-input" placeholder="Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-input" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-input" placeholder="Company (Optional)">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-input form-textarea" placeholder="Project Details" required></textarea>
-                </div>
-                <button type="submit" class="btn">
-                    Send Message
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </form> -->
+               <!-- <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Company (Optional)">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input form-textarea" placeholder="Project Details" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">
+                        Send Message
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form> -->
+            </div>
         </div>
-    </div>
-    <div class="section-number">05</div>
-</section>
+        <div class="section-number">05</div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">SAYAN KHAN</div>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/cyanophyceae_bga/" class="footer-link">Instagram</a>
+                    <a href="" class="footer-link">mdsayankhan24kh@gmail.com</a>
+                    
+                </div>
+                <div class="footer-copyright">
+                    ©2026 sayankhan. All performance metrics real-time.
+                </div>
+            </div>
+        </div>
+    </footer>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-logo">SAYAN KHAN</div>
-            <div class="footer-links">
-                <a href="https://www.instagram.com/cyanophyceae_bga/" class="footer-link">Instagram</a>
-                <a href="" class="footer-link">mdsayankhan24kh@gmail.com</a>
+    <script>
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Portfolio Initializing...');
+            
+            // Remove loader after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    initEverything();
+                }, 500);
+            }, 2000);
+        });
+
+        function initEverything() {
+            initCustomCursor();
+            init3DScene();
+            initAnimations();
+            initScrollEffects();
+            initPerformanceMonitor();
+            initForm();
+            initSkillBars();
+        }
+
+        // CUSTOM CURSOR
+        function initCustomCursor() {
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
                 
-            </div>
-            <div class="footer-copyright">
-                ©2026 sayankhan. All performance metrics real-time.
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script>
-    // INITIALIZATION
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('🚀 Portfolio Initializing...');
-        
-        // Remove loader after 2 seconds
-        setTimeout(() => {
-            document.getElementById('loader').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                initEverything();
-            }, 500);
-        }, 2000);
-    });
-
-    function initEverything() {
-        initCustomCursor();
-        init3DScene();
-        initMobileNavigation();
-        initAnimations();
-        initScrollEffects();
-        initPerformanceMonitor();
-        initForm();
-        initSkillBars();
-    }
-
-    // CUSTOM CURSOR
-    function initCustomCursor() {
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX + 'px';
-                follower.style.top = e.clientY + 'px';
-            }, 100);
-        });
-        
-        // Change cursor on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .work-card, .nav-link');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursor.style.borderColor = 'var(--accent-secondary)';
-                follower.style.transform = 'translate(-50%, -50%) scale(2)';
-                follower.style.background = 'var(--accent-secondary)';
+                setTimeout(() => {
+                    follower.style.left = e.clientX + 'px';
+                    follower.style.top = e.clientY + 'px';
+                }, 100);
             });
             
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.borderColor = 'var(--accent-primary)';
-                follower.style.transform = 'translate(-50%, -50%) scale(1)';
-                follower.style.background = 'var(--accent-primary)';
-            });
-        });
-    }
-
-    // MOBILE NAVIGATION
-    function initMobileNavigation() {
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                mobileMenuBtn.setAttribute('aria-expanded', 
-                    navLinks.classList.contains('active'));
-            });
-            
-            // Close menu when clicking a link
-            navLinks.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            // Change cursor on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .work-card, .nav-link');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursor.style.borderColor = 'var(--accent-secondary)';
+                    follower.style.transform = 'translate(-50%, -50%) scale(2)';
+                    follower.style.background = 'var(--accent-secondary)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.borderColor = 'var(--accent-primary)';
+                    follower.style.transform = 'translate(-50%, -50%) scale(1)';
+                    follower.style.background = 'var(--accent-primary)';
                 });
             });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
         }
-    }
 
-    // 3D SCENE
-    function init3DScene() {
-        // Hero Canvas
-        const heroCanvas = document.getElementById('hero-canvas');
-        if (!heroCanvas) return;
-        
-        const heroScene = new THREE.Scene();
-        const heroCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const heroRenderer = new THREE.WebGLRenderer({ 
-            canvas: heroCanvas,
-            alpha: true,
-            antialias: true 
-        });
-        
-        heroRenderer.setSize(window.innerWidth, window.innerHeight);
-        heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        
-        // Create floating geometry
-        const geometry = new THREE.IcosahedronGeometry(1, 0);
-        const material = new THREE.MeshBasicMaterial({
-            color: 0x0066FF,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        
-        const objects = [];
-        const objectCount = window.innerWidth < 768 ? 10 : 20; // Less objects on mobile
-        
-        for (let i = 0; i < objectCount; i++) {
-            const mesh = new THREE.Mesh(geometry, material);
-            
-            // Random position in sphere
-            const radius = 10;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            
-            mesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
-            mesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
-            mesh.position.z = radius * Math.cos(phi);
-            
-            mesh.userData = {
-                speed: 0.2 + Math.random() * 0.3,
-                radius: radius,
-                theta: theta,
-                phi: phi
-            };
-            
-            heroScene.add(mesh);
-            objects.push(mesh);
-        }
-        
-        heroCamera.position.z = 25;
-        
-        // Animation loop with mobile optimization
-        let frameId = null;
-        let lastTime = 0;
-        const fpsLimit = window.innerWidth < 768 ? 30 : 60; // Lower FPS on mobile
-        
-        function animateHero(time) {
-            frameId = requestAnimationFrame(animateHero);
-            
-            // Throttle FPS on mobile
-            if (window.innerWidth < 768 && time - lastTime < 1000 / fpsLimit) {
-                return;
-            }
-            lastTime = time;
-            
-            objects.forEach(obj => {
-                obj.userData.theta += 0.005 * obj.userData.speed;
-                
-                obj.position.x = obj.userData.radius * Math.sin(obj.userData.phi) * Math.cos(obj.userData.theta);
-                obj.position.y = obj.userData.radius * Math.sin(obj.userData.phi) * Math.sin(obj.userData.theta);
-                obj.position.z = obj.userData.radius * Math.cos(obj.userData.phi);
-                
-                obj.rotation.x += 0.01;
-                obj.rotation.y += 0.01;
+        // 3D SCENE
+        function init3DScene() {
+            // Hero Canvas
+            const heroCanvas = document.getElementById('hero-canvas');
+            const heroScene = new THREE.Scene();
+            const heroCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const heroRenderer = new THREE.WebGLRenderer({ 
+                canvas: heroCanvas,
+                alpha: true,
+                antialias: true 
             });
             
-            heroRenderer.render(heroScene, heroCamera);
-        }
-        
-        animateHero();
-        
-        // Resize handler
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
+            heroRenderer.setSize(window.innerWidth, window.innerHeight);
+            heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Create floating geometry
+            const geometry = new THREE.IcosahedronGeometry(1, 0);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x0066FF,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const objects = [];
+            const objectCount = 20;
+            
+            for (let i = 0; i < objectCount; i++) {
+                const mesh = new THREE.Mesh(geometry, material);
+                
+                // Random position in sphere
+                const radius = 10;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                mesh.position.x = radius * Math.sin(phi) * Math.cos(theta);
+                mesh.position.y = radius * Math.sin(phi) * Math.sin(theta);
+                mesh.position.z = radius * Math.cos(phi);
+                
+                mesh.userData = {
+                    speed: 0.2 + Math.random() * 0.3,
+                    radius: radius,
+                    theta: theta,
+                    phi: phi
+                };
+                
+                heroScene.add(mesh);
+                objects.push(mesh);
+            }
+            
+            heroCamera.position.z = 25;
+            
+            // Animation loop
+            function animateHero() {
+                requestAnimationFrame(animateHero);
+                
+                objects.forEach(obj => {
+                    obj.userData.theta += 0.005 * obj.userData.speed;
+                    
+                    obj.position.x = obj.userData.radius * Math.sin(obj.userData.phi) * Math.cos(obj.userData.theta);
+                    obj.position.y = obj.userData.radius * Math.sin(obj.userData.phi) * Math.sin(obj.userData.theta);
+                    obj.position.z = obj.userData.radius * Math.cos(obj.userData.phi);
+                    
+                    obj.rotation.x += 0.01;
+                    obj.rotation.y += 0.01;
+                });
+                
+                heroRenderer.render(heroScene, heroCamera);
+            }
+            
+            animateHero();
+            
+            // Resize handler
+            window.addEventListener('resize', () => {
                 heroCamera.aspect = window.innerWidth / window.innerHeight;
                 heroCamera.updateProjectionMatrix();
                 heroRenderer.setSize(window.innerWidth, window.innerHeight);
-                heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            }, 250);
-        });
-        
-        // Showcase Canvas (simpler particles)
-        const showcaseCanvas = document.getElementById('showcase-canvas');
-        if (showcaseCanvas) {
-            const showcaseScene = new THREE.Scene();
-            const showcaseCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const showcaseRenderer = new THREE.WebGLRenderer({
-                canvas: showcaseCanvas,
-                alpha: true,
-                antialias: window.innerWidth >= 768 // Disable antialias on mobile
             });
             
-            showcaseRenderer.setSize(window.innerWidth, window.innerHeight);
-            showcaseRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            
-            // Create particles - fewer on mobile
-            const particlesCount = window.innerWidth < 768 ? 1000 : 5000;
-            const particlesGeometry = new THREE.BufferGeometry();
-            const posArray = new Float32Array(particlesCount * 3);
-            
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 50;
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.02,
-                color: 0x0066FF,
-                transparent: true,
-                opacity: 0.6
-            });
-            
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            showcaseScene.add(particlesMesh);
-            
-            showcaseCamera.position.z = 20;
-            
-            // Animation with mobile optimization
-            let showcaseFrameId = null;
-            let showcaseLastTime = 0;
-            
-            function animateShowcase(time) {
-                showcaseFrameId = requestAnimationFrame(animateShowcase);
+            // Showcase Canvas (simpler particles)
+            const showcaseCanvas = document.getElementById('showcase-canvas');
+            if (showcaseCanvas) {
+                const showcaseScene = new THREE.Scene();
+                const showcaseCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const showcaseRenderer = new THREE.WebGLRenderer({
+                    canvas: showcaseCanvas,
+                    alpha: true,
+                    antialias: true
+                });
                 
-                if (window.innerWidth < 768 && time - showcaseLastTime < 1000 / 30) {
-                    return;
-                }
-                showcaseLastTime = time;
-                
-                particlesMesh.rotation.x += 0.001;
-                particlesMesh.rotation.y += 0.002;
-                
-                showcaseRenderer.render(showcaseScene, showcaseCamera);
-            }
-            
-            animateShowcase();
-            
-            // Resize
-            window.addEventListener('resize', () => {
-                showcaseCamera.aspect = window.innerWidth / window.innerHeight;
-                showcaseCamera.updateProjectionMatrix();
                 showcaseRenderer.setSize(window.innerWidth, window.innerHeight);
                 showcaseRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            });
-            
-            // Pause animation when not visible
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    cancelAnimationFrame(showcaseFrameId);
-                } else {
-                    animateShowcase();
+                
+                // Create particles
+                const particlesGeometry = new THREE.BufferGeometry();
+                const particlesCount = 5000;
+                const posArray = new Float32Array(particlesCount * 3);
+                
+                for (let i = 0; i < particlesCount * 3; i++) {
+                    posArray[i] = (Math.random() - 0.5) * 50;
                 }
-            });
+                
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                
+                const particlesMaterial = new THREE.PointsMaterial({
+                    size: 0.02,
+                    color: 0x0066FF,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                
+                const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+                showcaseScene.add(particlesMesh);
+                
+                showcaseCamera.position.z = 20;
+                
+                // Animation
+                function animateShowcase() {
+                    requestAnimationFrame(animateShowcase);
+                    
+                    particlesMesh.rotation.x += 0.001;
+                    particlesMesh.rotation.y += 0.002;
+                    
+                    showcaseRenderer.render(showcaseScene, showcaseCamera);
+                }
+                
+                animateShowcase();
+                
+                // Resize
+                window.addEventListener('resize', () => {
+                    showcaseCamera.aspect = window.innerWidth / window.innerHeight;
+                    showcaseCamera.updateProjectionMatrix();
+                    showcaseRenderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
         }
-    }
 
-    // ANIMATIONS
-    function initAnimations() {
-        // GSAP ScrollTrigger
-        if (window.gsap && window.ScrollTrigger) {
+        // ANIMATIONS
+        function initAnimations() {
+            // GSAP ScrollTrigger
             gsap.registerPlugin(ScrollTrigger);
             
             // Animate stats
@@ -1617,201 +1370,166 @@
                 }
             });
         }
-    }
 
-    // SCROLL EFFECTS
-    function initScrollEffects() {
-        // Update active nav link
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const scrollDots = document.querySelectorAll('.scroll-dot');
-        
-        window.addEventListener('scroll', () => {
-            let current = '';
+        // SCROLL EFFECTS
+        function initScrollEffects() {
+            // Update active nav link
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const scrollDots = document.querySelectorAll('.scroll-dot');
             
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
+            window.addEventListener('scroll', () => {
+                let current = '';
                 
-                if (scrollY >= sectionTop - 300) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-            
-            scrollDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-section') === current) {
-                    dot.classList.add('active');
-                }
-            });
-        });
-        
-        // Scroll to section on dot click
-        scrollDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const sectionId = dot.getAttribute('data-section');
-                const section = document.getElementById(sectionId);
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= sectionTop - 300) {
+                        current = section.getAttribute('id');
+                    }
+                });
                 
-                window.scrollTo({
-                    top: section.offsetTop,
-                    behavior: 'smooth'
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                scrollDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === current) {
+                        dot.classList.add('active');
+                    }
                 });
             });
-        });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
+            
+            // Scroll to section on dot click
+            scrollDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop,
+                        top: section.offsetTop,
                         behavior: 'smooth'
                     });
-                }
+                });
             });
-        });
-    }
+        }
 
-    // PERFORMANCE MONITOR
-    function initPerformanceMonitor() {
-        // FPS Counter
-        let frameCount = 0;
-        let lastTime = performance.now();
-        let fps = 60;
-        
-        function updateFPS() {
-            frameCount++;
-            const currentTime = performance.now();
+        // PERFORMANCE MONITOR
+        function initPerformanceMonitor() {
+            // FPS Counter
+            let frameCount = 0;
+            let lastTime = performance.now();
+            let fps = 60;
             
-            if (currentTime - lastTime >= 1000) {
-                fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-                frameCount = 0;
-                lastTime = currentTime;
+            function updateFPS() {
+                frameCount++;
+                const currentTime = performance.now();
                 
-                document.getElementById('fps-counter').textContent = fps;
-                
-                // Change color based on FPS
-                const fpsElement = document.getElementById('fps-counter');
-                if (fps < 30) {
-                    fpsElement.style.color = 'var(--danger)';
-                } else if (fps < 50) {
-                    fpsElement.style.color = 'var(--warning)';
-                } else {
-                    fpsElement.style.color = 'var(--success)';
+                if (currentTime - lastTime >= 1000) {
+                    fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+                    frameCount = 0;
+                    lastTime = currentTime;
+                    
+                    document.getElementById('fps-counter').textContent = fps;
+                    
+                    // Change color based on FPS
+                    const fpsElement = document.getElementById('fps-counter');
+                    if (fps < 30) {
+                        fpsElement.style.color = 'var(--danger)';
+                    } else if (fps < 50) {
+                        fpsElement.style.color = 'var(--warning)';
+                    } else {
+                        fpsElement.style.color = 'var(--success)';
+                    }
                 }
+                
+                requestAnimationFrame(updateFPS);
             }
             
-            requestAnimationFrame(updateFPS);
+            updateFPS();
+            
+            // Mock memory usage (in real app, use performance.memory if available)
+            setInterval(() => {
+                const memory = 20 + Math.random() * 10;
+                document.getElementById('memory-usage').textContent = Math.round(memory);
+            }, 2000);
         }
-        
-        updateFPS();
-        
-        // Mock memory usage (in real app, use performance.memory if available)
-        setInterval(() => {
-            const memory = 20 + Math.random() * 10;
-            document.getElementById('memory-usage').textContent = Math.round(memory);
-        }, 2000);
-    }
 
-    // FORM HANDLING
-    function initForm() {
-        const form = document.querySelector('.contact-form');
-        
-        if (!form) return;
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // FORM HANDLING
+        function initForm() {
+            const form = document.querySelector('.contact-form');
             
-            // Simple validation
-            const inputs = form.querySelectorAll('input, textarea');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                if (input.hasAttribute('required') && !input.value.trim()) {
-                    isValid = false;
-                    input.style.borderBottomColor = 'var(--danger)';
-                } else {
-                    input.style.borderBottomColor = '';
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simple validation
+                const inputs = form.querySelectorAll('input, textarea');
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    if (input.hasAttribute('required') && !input.value.trim()) {
+                        isValid = false;
+                        input.style.borderBottomColor = 'var(--danger)';
+                    } else {
+                        input.style.borderBottomColor = '';
+                    }
+                });
+                
+                if (isValid) {
+                    // In real app, send to server
+                    const button = form.querySelector('button');
+                    const originalText = button.innerHTML;
+                    
+                    button.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16.875 10.625H10.625V16.875H9.375V10.625H3.125V9.375H9.375V3.125H10.625V9.375H16.875V10.625Z" fill="currentColor"/>
+                        </svg>
+                        Message Sent
+                    `;
+                    button.style.background = 'var(--success)';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.background = '';
+                        form.reset();
+                    }, 3000);
                 }
             });
+        }
+
+        // SKILL BARS ANIMATION
+        function initSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-fill');
             
-            if (isValid) {
-                // In real app, send to server
-                const button = form.querySelector('button');
-                const originalText = button.innerHTML;
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
                 
-                button.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M16.875 10.625H10.625V16.875H9.375V10.625H3.125V9.375H9.375V3.125H10.625V9.375H16.875V10.625Z" fill="currentColor"/>
-                    </svg>
-                    Message Sent
-                `;
-                button.style.background = 'var(--success)';
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        bar.style.transform = `scaleX(${width / 100})`;
+                        bar.style.transition = 'transform 1.5s cubic-bezier(0.19, 1, 0.22, 1)';
+                        observer.unobserve(bar);
+                    }
+                }, { threshold: 0.5 });
                 
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.style.background = '';
-                    form.reset();
-                }, 3000);
+                observer.observe(bar);
+            });
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Re-initialize 3D scenes on resize
+            const heroCanvas = document.getElementById('hero-canvas');
+            if (heroCanvas) {
+                heroCanvas.width = window.innerWidth;
+                heroCanvas.height = window.innerHeight;
             }
         });
-    }
-
-    // SKILL BARS ANIMATION
-    function initSkillBars() {
-        const skillBars = document.querySelectorAll('.skill-fill');
-        
-        skillBars.forEach(bar => {
-            const width = bar.getAttribute('data-width');
-            
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    bar.style.transform = `scaleX(${width / 100})`;
-                    bar.style.transition = 'transform 1.5s cubic-bezier(0.19, 1, 0.22, 1)';
-                    observer.unobserve(bar);
-                }
-            }, { threshold: 0.5 });
-            
-            observer.observe(bar);
-        });
-    }
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        // Re-initialize 3D scenes on resize
-        const heroCanvas = document.getElementById('hero-canvas');
-        if (heroCanvas) {
-            heroCanvas.width = window.innerWidth;
-            heroCanvas.height = window.innerHeight;
-        }
-    });
-
-    // Prevent default touch behaviors that might interfere
-    document.addEventListener('touchstart', function(e) {
-        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-        }
-    }, { passive: false });
-
-    // Handle iOS rubber band effect
-    document.body.addEventListener('touchmove', function(e) {
-        if (document.body.scrollHeight === document.body.clientHeight) {
-            e.preventDefault();
-        }
-    }, { passive: false });
-</script>
+    </script>
 </body>
 </html>
